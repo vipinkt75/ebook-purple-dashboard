@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static i18n crispy_forms_tags %}
+{% block content %}
+
+<div class="page-header">
+    <h3 class="page-title">
+       <a href="{% url 'web:index' %}">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span> 
+        </a> 
+        {{title}}
+    </h3>
+    {% if request.user.is_superuser %}
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'web:user_create' %}" class="btn btn-lg btn-gradient-primary">New {{title}}</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                {% if object_list %}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover border" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> username </th>
+                                <th> email </th>
+                                <th> date join </th>
+                                <th> active </th>
+                                <th>Superuser</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in object_list %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td> {{object.username}}</td>
+                                <td> {{object.email}} </td>
+                                <td> {{object.date_joined}} </td>
+                                {% if object.is_active %}
+                                <td> yes </td>
+                                {% else %}
+                                <td> no </td>
+                                {% endif %}
+
+                                {% if object.is_superuser %}
+                                <td> yes </td>
+                                {% else %}
+                                <td> no </td>
+                                {% endif %}
+                                
+                                
+                                
+                                <td>
+
+                                    {% if request.user.is_superuser %}
+
+                                    <a href="{% url 'web:user_update' object.id %}" class="btn btn-sm btn-circle btn-info"><i class="mdi mdi-pencil"></i></a>
+                                    <a href="{% url 'web:user_delete' object.id %}" class="btn btn-sm btn-circle btn-danger"><i class="mdi mdi-delete"></i></a>
+                                    
+                                    {% endif %}
+
+                                </td>
+                                                               
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

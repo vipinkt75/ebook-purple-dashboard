@@ -38,14 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'import_export',
     'versatileimagefield',
     'tinymce',
     'django_extensions',
+
     "crispy_forms",
     "crispy_bootstrap5",
+
     "admin_interface",
     "colorfield",
+
     'registration', 
     
 ]
@@ -171,23 +175,22 @@ from decouple import config
 
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-SEND_ACTIVATION_EMAIL = False
+SEND_ACTIVATION_EMAIL = True
 REGISTRATION_EMAIL_SUBJECT_PREFIX = ''
 
 REGISTRATION_OPEN = True
-LOGIN_URL = '/app/accounts/login/'
-LOGOUT_URL = '/app/accounts/logout/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = '/'
 
+
+#For email
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
 
-DEFAULT_FROM_EMAIL= config('DEFAULT_FROM_EMAIL')
-DEFAULT_BCC_EMAIL= config('DEFAULT_BCC_EMAIL')
-DEFAULT_REPLY_TO_EMAIL = config('DEFAULT_REPLY_TO_EMAIL')
-SERVER_EMAIL = config('SERVER_EMAIL')
-ADMIN_EMAIL = config('ADMIN_EMAIL')
+#This did the trick
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

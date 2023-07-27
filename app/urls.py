@@ -15,5 +15,25 @@ urlpatterns = [
     path("tables/", views.Table.as_view(), name="tables"),
     path("error/", views.Error.as_view(), name="error"),
 
+
+    path("book_create/", views.BookCreate.as_view(), name="book_create"),
+    path("book_list/", views.BookList.as_view(), name="book_list"),
+    path("book_detail/<str:pk>/", views.BookDetail.as_view(), name="book_detail"),
+    path("book_update/<str:pk>/", views.BookUpdate.as_view(), name="book_update"),
+    path("book_delete/<str:pk>/", views.BookDelete.as_view(), name="book_delete"),
+
+
+    path("author_create/", views.AuthorCreate.as_view(), name="author_create"),
+    path("author_list/", views.Authorlist.as_view(), name="author_list"),
+    path("author_detail/<str:pk>/", views.Authordetail.as_view(), name="author_detail"),
+    path("author_delete/<str:pk>/", views.Authordelete.as_view(), name="author_delete"),
+    path("author_update/<str:pk>/", views.Authorupdate.as_view(), name="author_update"),
+
+
+    path("user_list/", views.userlist.as_view(), name="user_list"),
+    path("user_create/", views.UserCreate.as_view(), name="user_create"),
+    path("user_update/<str:pk>/", views.UserUpdate.as_view(), name="user_update"),
+    path("user_delete/<str:pk>/", views.UserDelete.as_view(), name="user_delete"),
+
 ]
 
